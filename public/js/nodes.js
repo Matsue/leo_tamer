@@ -201,11 +201,37 @@
         }
       });
 
+      detail_grid  = Ext.create("Ext.grid.Panel", {
+        xtype: 'grid',
+        forceFit: true,
+        columns: [
+          {
+            dataIndex: "name",
+            text: "Name"
+          }, {
+            dataIndex: "value",
+            text: "Value"
+          }
+        ],
+        store: detail_store
+      });
+
+      detail_panel = Ext.create("Ext.panel.Panel", {
+        title: 'details',
+        region: "east",
+        width: 300,
+        layout: "fit",
+        items: detail_grid
+      });
+
       Ext.apply(this, {
         defaults: {
           split: true
         },
-        items: node_grid
+        items: [
+          node_grid,
+          detail_panel
+        ]
       });
       return this.callParent(arguments);
     }
