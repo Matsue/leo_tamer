@@ -83,68 +83,15 @@
             type: 'json',
             root: 'data'
           }
-        },
-        autoLoad: true
+        }
       });
 
-      node_grid_dblclick = function(self, record, item, index, event) {
+      node_grid_select = function(self, record, item, index, event) {
         console.log(self, record, item, index, event);
-        return Ext.create('Ext.window.Window', {
-          title: record.data.node,
-          width: 600,
-          items: [
-            {
-              xtype: "panel",
-              padding: "0 0 10 0",
-              items: {
-                xtype: "combo",
-                store: status_store,
-                labelWidth: 300,
-                fieldLabel: "Status:",
-                displayField: "status",
-                valueField: "status",
-                editable: false,
-                readOnly: true,
-                listeners: {
-                  afterrender: function(self) {
-                    return self.setValue(record.data.status);
-                  }
-                }
-              }
-              /* XXX: it will be used
-              buttons: [{
-                text: "OK",
-                handler: ->
-              }, {
-                text: "Cancel",
-                handler: ->
-              }]
-              */
-            }, {
-              xtype: 'grid',
-              forceFit: true,
-              columns: [
-                {
-                  dataIndex: "name",
-                  text: "Name"
-                }, {
-                  dataIndex: "value",
-                  text: "Value"
-                }
-              ],
-              store: detail_store
-            }
-          ],
-          buttons: [
-            {
-              text: "Close",
-              scope: this,
-              handler: function() {
-                return Ext.WindowManager.getActive().close();
-              }
-            }
-          ]
-        }).show();
+        detail_store.getProxy().extraParams = {
+          node: record.data.node
+        };
+        detail_store.load();
       };
 
       node_grid = Ext.create("Ext.grid.Panel", {
@@ -197,7 +144,7 @@
           viewready: function() {
             return this.getSelectionModel().select(0);
           },
-          itemdblclick: node_grid_dblclick
+          select: node_grid_select
         }
       });
 
