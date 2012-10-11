@@ -9,7 +9,7 @@ require_relative "../lib/config"
 
 include Rack::Test::Methods
 
-def get_json(url)
-  get url
+def get_json(url, params=nil)
+  get url, params
   @data = JSON.parse(last_response.body.to_s)
 end

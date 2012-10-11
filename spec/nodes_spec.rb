@@ -56,4 +56,33 @@ describe LeoTamer::Nodes do
       end
     end
   end
+
+  describe "/nodes/detail.json" do
+
+    context "no params" do
+      it "raises Error" do
+        lambda {
+          get_json "/nodes/detail.json"
+        }.should raise_error
+      end
+    end
+
+    context "with params" do
+      subject { @data["data"] }
+
+      before do
+        get_json "/nodes/detail.json",
+                 :node => "storage_0@127.0.0.1"
+      end
+
+      it "returns node detail status" do
+        should be_a Array
+        subject.each do |kv|
+          kv.should be_a Hash
+          kv.should have_key "name"
+          kv.should have_key "value"
+        end
+      end
+    end
+  end
 end
