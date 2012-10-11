@@ -5,11 +5,6 @@
     fields: ["type", "node", "status", "ring_hash_current", "ring_hash_previous", "joined_at"]
   });
 
-  Ext.define("LeoTamer.model.NameValue", {
-    extend: 'Ext.data.Model',
-    fields: ["name", "value"]
-  });
-
   Ext.define("LeoTamer.Nodes", {
     extend: "Ext.panel.Panel",
     id: "nodes_panel",
@@ -180,6 +175,7 @@
           detail_panel
         ]
       });
+
       return this.callParent(arguments);
     }
   });
