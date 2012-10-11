@@ -5,6 +5,8 @@ require "coffee-script"
 require "coffee-filter"
 require "rack/test"
 
+require_relative "../lib/config"
+
 include Rack::Test::Methods
 
 def get_json(url)
