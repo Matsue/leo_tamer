@@ -23,7 +23,7 @@
             type: 'json',
             root: 'data'
           },
-          // disabe unused params
+          // disable unused params
           noCache: false,
           limitParam: undefined,
           pageParam: undefined,
