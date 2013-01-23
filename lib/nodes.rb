@@ -104,5 +104,8 @@ class LeoTamer
     post "/rebalance" do
       @@manager.rebalance
     end
+
+    post "/compaction" do
+    end
   end
 end
